@@ -2,7 +2,6 @@ import cv2 as cv
 import mediapipe as mp
 import time
 import math
-from mediapipe import python
 import numpy as np
 
 class BlinkDetector():
