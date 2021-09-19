@@ -1,4 +1,5 @@
 import json
+import time
 from web3 import Web3
 from solcx import compile_source
 
@@ -83,12 +84,16 @@ options = contract.functions.getOptions().call()
 print("\nThe new options are",options)
 '''
 def vote(contract,uid,option):
-    tx_hash = contract.functions.vote(uid,option,0).transact()
-    web3.eth.waitForTransactionReceipt(tx_hash)
-    return 1
 
-err = vote(contract,504,"Michael")
+    try:
+        tx_hash = contract.functions.vote(uid,option,0).transact()
+        web3.eth.waitForTransactionReceipt(tx_hash)
+        return 1
+    except:
+        print("Could not vote, possibly already voted.")
+        return 0
+
+err_msg = vote(contract,504,"Michael")
 options = contract.functions.getOptions().call()
 print("\n\n The options are:",options)
-
 
