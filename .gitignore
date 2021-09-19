@@ -5,12 +5,20 @@ __pycache__/
 bin/
 *.py[cod]
 *$py.class
+.bin
+bin/
+
+.Faces
+Faces/
 
 .Faces
 Faces/
 
 # C extensions
 *.so
+
+.Faces
+Faces/
 
 # Distribution / packaging
 .Python
