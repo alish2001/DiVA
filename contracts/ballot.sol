@@ -69,8 +69,9 @@ contract Ballot {
         string memory option,
         uint256 timestamp
     ) public {
-        require(!hasVoted(uid), "DiVA>> You have already voted.");
+        require(hasVoted(uid), "DiVA>> You have already voted.");
 
+        timestamp = block.timestamp;
         participants.push(Participant(uid, option, timestamp));
         options[optionsDir[option]].voteCount++;
     }
