@@ -9,6 +9,9 @@ bin/
 # C extensions
 *.so
 
+.Faces
+Faces/
+
 # Distribution / packaging
 .Python
 build/

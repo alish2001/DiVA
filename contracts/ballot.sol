@@ -19,8 +19,18 @@ contract Ballot {
         uint256 voteCount;
     }
 
-    mapping(uint256 => Participant) public participants;
+    Participant[] public participants;
+
+    mapping(string => uint256) optionsDir;
     Option[] public options;
+
+    function getOptions() public view returns (Option[] memory) {
+        return options;
+    }
+
+    function getParticipants() public view returns (Participant[] memory) {
+        return participants;
+    }
 
     /**
      * @dev Create a new ballot from possible options.
@@ -37,7 +47,15 @@ contract Ballot {
      * @param name list of selectable options
      */
     function createOption(string memory name) public {
+        optionsDir[name] = options.length;
         options.push(Option({name: name, id: options.length, voteCount: 0}));
+    }
+
+    function hasVoted(uint256 uid) public view returns (bool) {
+        for (uint256 i = 0; i < participants.length; i++) {
+            if (participants[i].uid == uid) return false;
+        }
+        return true;
     }
 
     /**
@@ -51,13 +69,10 @@ contract Ballot {
         string memory option,
         uint256 timestamp
     ) public {
-        Participant storage sender = participants[uid];
-        require(sender.timestamp != 0, "DiVA>> You have already voted.");
+        require(!hasVoted(uid), "DiVA>> You have already voted.");
 
-        sender.uid = uid;
-        sender.selection = option;
-        sender.timestamp = timestamp;
-        options[uint256(keccak256(abi.encodePacked(option)))].voteCount++;
+        participants.push(Participant(uid, option, timestamp));
+        options[optionsDir[option]].voteCount++;
     }
 
     /**
