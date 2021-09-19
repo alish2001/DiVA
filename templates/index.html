@@ -1,0 +1,56 @@
+<html>
+
+<head>
+    <title>DiVA</title>
+</head>
+
+<body style="background-color: black; color: white;">
+    <h1>DiVA</h1>
+    <button>Verify Your Identity</button>
+
+    {% if verified %}
+    <p>Identity Status: Verified</p>
+    {% else %}
+    <p>Identity Status: Unverified</p>
+    {% endif %}
+        
+    <div style="display:inline-block; padding: 10px; border: 2px solid white">
+        <center>
+            <h3>Current Election</h3>
+        </center>
+        <ul>
+            {% for option in options %}
+            <li>{{option.votecount}} | {{option.name}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <br>
+    <hr>
+
+    <form action="/" method="POST">
+        <div class="form-group">
+            <label>Phone Number:</label>
+            <input type="text" class="form-control" id="uid" name="uid" placeholder="Enter your phone #">
+            <label>Vote:</label>
+            <select id="option", name="option">
+                {% for option in options %}
+                <option value="{{ option.name }}">{{ option.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Vote!</button>
+    </form>
+
+    {% for participant in participants %}
+    <div style="display:inline-block; padding-right: 10px; border: 2px solid white">
+        <center><h4>Ballot</h4></center>
+        <ul>
+            <li>User ID: {{participant.uid}}</li>
+            <li>Selection: {{participant.selection}}</li>
+            <li>TimeStamp: {{participant.timestamp}}</li>
+        </ul>
+    </div>
+    {% endfor %}
+</body>
+</html>

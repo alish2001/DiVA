@@ -69,10 +69,11 @@ contract Ballot {
         string memory option,
         uint256 timestamp
     ) public {
-        require(hasVoted(uid), "DiVA>> You have already voted.");
+        uint256 hashed_uid = uint256(keccak256(abi.encodePacked(uid)));
+        require(hasVoted(hashed_uid), "DiVA>> You have already voted.");
 
         timestamp = block.timestamp;
-        participants.push(Participant(uid, option, timestamp));
+        participants.push(Participant(hashed_uid, option, timestamp));
         options[optionsDir[option]].voteCount++;
     }
 
