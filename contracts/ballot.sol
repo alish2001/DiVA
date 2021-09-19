@@ -24,11 +24,11 @@ contract Ballot {
 
     /**
      * @dev Create a new ballot from possible options.
-     * @param options list of selectable options
+     * @param availableOptions list of selectable options
      */
-    constructor(string[] memory options) {
-        for (uint256 i = 0; i < options.length; i++) {
-            createOption(options[i]);
+    constructor(string[] memory availableOptions) {
+        for (uint256 i = 0; i < availableOptions.length; i++) {
+            createOption(availableOptions[i]);
         }
     }
 
