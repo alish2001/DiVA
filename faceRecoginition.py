@@ -1,7 +1,5 @@
 import os
 import numpy as np
-from urllib.parse import urlparse
-from io import BytesIO
 from PIL import Image, ImageDraw
 from azure.cognitiveservices.vision.face import FaceClient
 from msrest.authentication import CognitiveServicesCredentials
@@ -159,9 +157,12 @@ class faceRecognition():
 
         return self.verify_result
     
-    def detect_and_verify_faces(self, target_image, source_image, draw=True):
-        self.target_image = target_image
-        self.source_image = source_image
+    def detect_and_verify_faces(self, base_folder, target_image_name, source_image_name, draw=True):
+        target_image_file_path =  os.path.join(base_folder, target_image_name)
+        source_image_file_path =  os.path.join(base_folder, source_image_name)
+
+        self.target_image = open(target_image_file_path, 'r+b')
+        self.source_image = open(source_image_file_path, 'r+b')
         self.face_line_width = 5
 
         self.target_detected_faces, self.detected_target_image_id = self.detectFaces(self.target_image, "target")
@@ -182,14 +183,10 @@ IMAGE_BASE_PATH = 'Faces'
 
 # Create target image file name and path
 target_image_file_name = 'Faraz-face.jpeg'
-target_image_file_path =  os.path.join(IMAGE_BASE_PATH, target_image_file_name)
+
 # Create source image file name and path
 source_image_file_name = 'Faraz-id-2.jpeg'
-source_image_file_path =  os.path.join(IMAGE_BASE_PATH, source_image_file_name)
 
-
-target_image = open(target_image_file_path, 'r+b')
-source_image = open(source_image_file_path, 'r+b')
 
 fc = faceRecognition()
-fc.detect_and_verify_faces(target_image, source_image, False)
+fc.detect_and_verify_faces(IMAGE_BASE_PATH, target_image_file_name, source_image_file_name, False)
