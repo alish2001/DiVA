@@ -10,7 +10,7 @@ ds_factor=0.6
 class VideoCamera(object):
     def __init__(self):
        #capturing video
-       self.video = cv2.VideoCapture(1)
+       self.video = cv2.VideoCapture(2)
 
     def read(self):
         return self.video.read()
