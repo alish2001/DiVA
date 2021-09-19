@@ -6,6 +6,9 @@ __pycache__/
 .bin
 bin/
 
+.Faces
+Faces/
+
 # C extensions
 *.so
 
