@@ -24,31 +24,34 @@ web3 = Web3(Web3.HTTPProvider(url))
 
 # set pre-funded account as sender
 web3.eth.default_account = web3.eth.accounts[0]
-
 Ballot = web3.eth.contract(abi=abi, bytecode=bytecode)
 
 # Submit the transaction that deploys the contract
-tx_hash = Ballot.constructor().transact()
+tx_hash = Ballot.constructor(["Johhny","Michael"]).transact()
 
 # Wait for the transaction to be mined, and get the transaction receipt
 tx_receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
+address = tx_receipt['contractAddress']
 
 web3.eth.defaultAccount = web3.eth.accounts[0]
 
-#abi = json.loads(abi.read())
-
-address = web3.toChecksumAddress("0xb8614e051e04e636cEcc5D243707F01cD70b4BdF")
+address = web3.toChecksumAddress(address)
 
 contract = web3.eth.contract(address = address, abi = abi)
 
-
 print("Connecting to ETH")
-print(str(contract.functions.returnEntry().call()))
-name = "Johhny"
-name = input()
-tx_hash = contract.functions.createCandidate(name).transact()
 
-web3.eth.waitForTransactionReceipt(tx_hash)
+options = contract.functions.getOptions().call()
+print("\n\n THE OPTIONS ARE ",options)
+
+name = "Johhny34"
+tx_hash = contract.functions.createOption(name).transact()
+
+print("breaks")
+#web3.eth.waitForTransactionReceipt(tx_hash)
 
 print('Added new candidate: ', name)
 # add list of candidates after update
+
+participants = contract.functions.getParticipants().call()
+print(participants)
