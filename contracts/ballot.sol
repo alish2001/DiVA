@@ -5,7 +5,7 @@ pragma solidity >=0.4.22 <0.9.0;
 contract Ballot{
 	uint public candidateCount = 0;  
 
-  struct Candidate{
+  struct Candidate {
     uint id;
     string name;
     bool vote;
@@ -13,7 +13,7 @@ contract Ballot{
 
   mapping(uint => Candidate) public candidates;
   
-  constructor() public{
+  constructor() {
     createCandidate("Alice");
   }
   
