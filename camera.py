@@ -5,12 +5,14 @@ from blinkDetector import blinkDetector
 import time
 
 # defining face detector
-face_cascade=cv2.CascadeClassifier("haarcascade_frontalface_alt2.xml")
-ds_factor=0.6
+face_cascade = cv2.CascadeClassifier("haarcascade_frontalface_alt2.xml")
+ds_factor = 0.6
+
+
 class VideoCamera(object):
     def __init__(self):
-       #capturing video
-       self.video = cv2.VideoCapture(-1)
+        # capturing video
+        self.video = cv2.VideoCapture(0)
 
     def read(self):
         return self.video.read()

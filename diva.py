@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, redirect
-import json
+from flask import Flask, render_template, request, redirect, Response
+from verficationPipeline import anti_spoof_check, id_check
+from camera import VideoCamera
 from datetime import datetime as d
-import pickle
 from web3 import Web3
 from solcx import compile_source
 
@@ -100,13 +100,38 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def main():
     elections = update()
-    print
     if request.method == "POST":
         req = request.form
-        print(req)
-        uid = req["uid"]
-        option = req["option"]
-        vote(uid, option)
+        if ("vote-form" in request.method):
+            uid = req["uid"]
+            option = req["option"]
+            vote(uid, option)
+        elif ("" in request.method):
+            uid = req["uid"]
+            option = req["option"]
+            vote(uid, option)
         return redirect(request.url)
 
     return render_template('index.html', verified=True, participants=elections[0]["participants"], options=elections[0]["options"])
+
+
+@app.route('/anti_spoof_verification')
+def anti_spoof_verification():
+    return render_template('spoof_check.html')
+
+
+@app.route('/anti_spoof_verification/video_feed')
+def anti_spoof_verification_video_feed():
+    return Response(anti_spoof_check(VideoCamera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/id_verification')
+def id_verification():
+    return render_template('id_check.html')
+
+
+@app.route('/id_verification/video_feed')
+def id_verification_video_feed():
+    return Response(id_check(VideoCamera()),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')

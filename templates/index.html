@@ -6,7 +6,9 @@
 
 <body style="background-color: black; color: white;">
     <h1>DiVA</h1>
+    <form method="get" action="{{ url_for('anti_spoof_verification') }}">
     <button>Verify Your Identity</button>
+    </form>
 
     {% if verified %}
     <p>Identity Status: Verified</p>
@@ -29,7 +31,7 @@
     <hr>
 
     <form action="/" method="POST">
-        <div class="form-group">
+        <div class="vote-form">
             <label>Phone Number:</label>
             <input type="text" class="form-control" id="uid" name="uid" placeholder="Enter your phone #">
             <label>Vote:</label>
@@ -53,41 +55,4 @@
     </div>
     {% endfor %}
 </body>
-</html>
-  <head>
-    <title>Voting Verification</title>
-  </head>
-  <body style="background-color: #e0e0e0">
-    <h1 style="margin-top: 20px; text-align: center; font-size: 50px">
-      Liveliness Verification
-    </h1>
-    <img
-      id="bg"
-      src="{{ url_for('anti_spoof_verification') }}"
-      style="
-        margin-top: 30px;
-        margin-left: 50%;
-        transform: translateX(-50%);
-        font-size: 50px;
-      "
-    />
-    <form method="get" action="{{ url_for('id_verification') }}">
-      <button
-        type="submit"
-        ;
-        style="
-          border-radius: 10px;
-          margin-top: 40px;
-          margin-left: 50%;
-          transform: translateX(-50%);
-          background-color: green;
-          color: white;
-          width: 600px;
-          height: 50px;
-        "
-      >
-        NEXT
-      </button>
-    </form>
-  </body>
 </html>

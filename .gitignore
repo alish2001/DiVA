@@ -1,15 +1,10 @@
 # Byte-compiled / optimized / DLL files
 .__pycache__
 __pycache__/
-.bin
-bin/
 *.py[cod]
 *$py.class
 .bin
 bin/
-
-.Faces
-Faces/
 
 .Faces
 Faces/
