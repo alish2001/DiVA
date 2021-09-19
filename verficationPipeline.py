@@ -163,7 +163,7 @@ def id_check(camera, base_folder='Photos', selfie_file_name='selfie_file.png', i
     result = fc.detect_and_verify_faces(
         base_folder, selfie_file_name, id_file_name, draw=False)
 
-    if result.is_identical or True:
+    if result.is_identical:
         ret, frame = camera.read()  # getting frame from camera
         cv2.rectangle(frame, (120, 120), (550, 300), (0, 153, 0), -1)
         cv2.putText(frame, 'You Are VERIFIED!', (170, 200),
