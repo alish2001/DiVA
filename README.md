@@ -1,6 +1,7 @@
 # DiVA
 
 Decentralized intelligent voting application. Hack the North 2021.
+![Logo](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/001/664/381/datas/original.png)
 
 ## Inspiration
 
