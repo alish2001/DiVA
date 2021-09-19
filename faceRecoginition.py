@@ -179,14 +179,14 @@ class faceRecognition():
         return self.verifyFaces()
 
 
-IMAGE_BASE_PATH = 'Faces'
+# IMAGE_BASE_PATH = 'Faces'
 
-# Create target image file name and path
-target_image_file_name = 'Faraz-face.jpeg'
+# # Create target image file name and path
+# target_image_file_name = 'Faraz-face.jpeg'
 
-# Create source image file name and path
-source_image_file_name = 'Faraz-id-2.jpeg'
+# # Create source image file name and path
+# source_image_file_name = 'Faraz-id-2.jpeg'
 
 
-fc = faceRecognition()
-fc.detect_and_verify_faces(IMAGE_BASE_PATH, target_image_file_name, source_image_file_name, False)
+# fc = faceRecognition()
+# fc.detect_and_verify_faces(IMAGE_BASE_PATH, target_image_file_name, source_image_file_name, False)

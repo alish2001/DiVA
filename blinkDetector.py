@@ -69,26 +69,24 @@ class blinkDetector():
         return ratio
 
     def detectBlinks(self, frame, CEF_COUNTER, TOTAL_BLINKS):
-        #  resizing frame
-        frame = cv.resize(frame, None, fx=1.5, fy=1.5, interpolation=cv.INTER_CUBIC)
         rgb_frame = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
 
         results  = self.face_mesh.process(rgb_frame)
         if results.multi_face_landmarks:
             mesh_coords = self.landmarksDetection(frame, results, False)
             ratio = self.blinkRatio(mesh_coords)
-            cv.putText(frame, 'ratio {0:.2f}'.format(ratio), (100, 100), self.FONTS, 1.0, (0,255,0), 2)
+            cv.putText(frame, 'Ratio {0:.2f}'.format(ratio), (100, 100), self.FONTS, 0.8, (0,255,0), 2)
 
             if ratio > 5.0:
                 CEF_COUNTER +=1
-                cv.putText(frame, 'Blink', (200, 50), self.FONTS, 1.0, (147,20,255), 2)
+                cv.putText(frame, 'Blink', (200, 50), self.FONTS, 0.8, (147,20,255), 2)
         
             else:
                 if CEF_COUNTER>self.CLOSED_EYES_FRAME:
                     TOTAL_BLINKS +=1
                     CEF_COUNTER =0
 
-            cv.putText(frame, f'Total Blinks: {TOTAL_BLINKS}', (100, 150), self.FONTS, 1.0, (0,255,0), 2)
+            cv.putText(frame, f'Total Blinks: {TOTAL_BLINKS}', (100, 150), self.FONTS, 0.8, (0,255,0), 2)
             
             cv.polylines(frame,  [np.array([mesh_coords[p] for p in self.LEFT_EYE ], dtype=np.int32)], True, (0,255,0), 1, cv.LINE_AA)
             cv.polylines(frame,  [np.array([mesh_coords[p] for p in self.RIGHT_EYE ], dtype=np.int32)], True,(0,255,0), 1, cv.LINE_AA)

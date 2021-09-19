@@ -42,10 +42,10 @@ def anti_spoof_check(camera, min_count=3, timeout=30, period_interval=7):
         # calculating frame per seconds FPS
         end_time = time.time()
         fps = frame_counter/(end_time - start_time)
-        cv2.putText(frame,f'FPS: {round(fps,1)}',(30, 50), FONTS, 1.2, (0,255,0), 2)
+        cv2.putText(frame,f'FPS: {round(fps,1)}',(30, 50), FONTS, 0.6, (0,255,0), 2)
 
-        cv2.putText(frame,'Total Time left: {0:.2f}'.format(timeout - (end_time- start_time)),(600, 50), FONTS, 0.8, (0,0,255), 2)
-        cv2.putText(frame,'Period Time left: {0:.2f}'.format(period_interval - (end_time-period_time)),(600, 100), FONTS, 0.8, (0,0,255), 2)
+        cv2.putText(frame,'Total Time left: {0:.2f}'.format(timeout - (end_time- start_time)),(400, 50), FONTS, 0.6, (0,0,255), 2)
+        cv2.putText(frame,'Period Time left: {0:.2f}'.format(period_interval - (end_time-period_time)),(400, 100), FONTS, 0.6, (0,0,255), 2)
 
         frame = camera.get_frame(frame)
 
@@ -70,7 +70,7 @@ def anti_spoof_check(camera, min_count=3, timeout=30, period_interval=7):
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
 
-def id_check(camera, base_folder='Photos', selfie_file_name='selfie_file.jpg', id_file_name='id_file.jpg', selfie_time=5, id_time=10, break_timer=5):
+def id_check(camera, base_folder='Photos', selfie_file_name='selfie_file.png', id_file_name='id_file.jpg', selfie_time=5, id_time=10, break_timer=5):
     ## Initial Break
     start_time = time.time()
     curr_time = start_time
