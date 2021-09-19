@@ -3,8 +3,6 @@
 from verficationPipeline import anti_spoof_check, id_check
 from flask import Flask, render_template, Response, redirect
 from camera import VideoCamera
-import time
-import cv2
 
 app = Flask(__name__)
 
@@ -26,7 +24,3 @@ def id_verification():
 def id_verification_video_feed():
     return Response(id_check(VideoCamera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
-
-
-if __name__ == '__main__':
-    app.run(threaded=True, port=5000)
