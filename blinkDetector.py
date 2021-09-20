@@ -67,7 +67,8 @@ class blinkDetector():
 
         ratio = (reRatio+leRatio)/2
         return ratio
-
+    
+    # Blink detection using eye ratio and frame deadness
     def detectBlinks(self, frame, CEF_COUNTER, TOTAL_BLINKS):
         rgb_frame = cv.cvtColor(frame, cv.COLOR_RGB2BGR)
 

@@ -11,10 +11,12 @@ class documentLocalizer():
         self.thickness = thickness
         self.color = color
 
+    ## Function for placing a designated rectangle on video feed for ID detection
     def getPlaceHolder(self, image):
         placeHolder = cv2.rectangle(image, self.startPoint, self.endPoint, self.color, self.thickness)
         return placeHolder
 
+    ## Function for ID card localization using change of prespective
     def getLocalizedDocument(self, image):
         pts1 = np.float32([[self.startPoint[0], self.startPoint[1]],[self.endPoint[0], self.startPoint[1]], [self.startPoint[0], self.endPoint[1]],[self.endPoint[0], self.endPoint[1]]]) # PREPARE POINTS FOR WARP
         pts2 = np.float32([[0, 0],[self.documentWidth, 0], [0, self.documentHeight],[self.documentWidth, self.documentHeight]]) # PREPARE POINTS FOR WARP

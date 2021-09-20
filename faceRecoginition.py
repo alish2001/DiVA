@@ -7,10 +7,10 @@ from msrest.authentication import CognitiveServicesCredentials
 
 
 # This key will serve all examples in this document.
-KEY = "1ab54bc5614647758a15fa64980c4af1"
+KEY = ""
 
 # This endpoint will be used in all examples in this quickstart.
-ENDPOINT = "https://face-recognition-diva.cognitiveservices.azure.com/"
+ENDPOINT = ""
 
 # # Create an authenticated FaceClient.
 # face_client = FaceClient(ENDPOINT, CognitiveServicesCredentials(KEY))

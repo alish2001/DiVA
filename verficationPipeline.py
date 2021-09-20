@@ -36,7 +36,8 @@ def anti_spoof_check(camera, min_count=3, timeout=30, period_interval=7):
         ret, frame = camera.read()  # getting frame from camera
         if not ret:
             break  # no more frames break
-
+	
+	# Calling blink detector
         frame, CEF_COUNTER, TOTAL_BLINKS = bl.detectBlinks(
             frame, CEF_COUNTER, TOTAL_BLINKS)
 
